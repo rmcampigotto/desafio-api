@@ -1,0 +1,211 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-style: sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    background-image: url('Imagens/Fundo.png');
+}
+
+.mensagem {
+    height: 120px;
+    background-color: rgb(10, 15, 13);
+    color: rgb(249, 249, 249);
+    align-items: center;
+    align-content: center;
+    display: grid;
+    justify-content: start;
+    justify-items: center;
+    background-image: url('Imagens/Fundo.png');
+}
+
+.mensagem img {
+
+    height: 80px;
+    width: 300px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.personagens {
+    color: rgb(10, 15, 13);
+    font-family: sans-serif;
+    display: block;
+    font-size: 15px;
+    font-weight: 400;
+    unicode-range: isolate;
+}
+
+.container {
+    margin-bottom: 60px;
+    margin-top: 60px;
+    text-align: center;
+}
+
+.container div h2 {
+    font-size: 22.5px;
+    font-weight: 700;
+}
+
+.grid {
+    column-gap: 30px;
+    display: grid;
+    font-family: sans-serif;
+    font-size: 15px;
+    row-gap: 30px;
+    align-items: center;
+    unicode-bidi: isolate;
+    line-height: normal;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.style_container {
+    display: flex;
+    flex-direction: column;
+    font-weight: 400;
+    grid-column-end: auto;
+    grid-column-start: span 3;
+    justify-self: center;
+    align-items: center;
+}
+
+.style_content {
+    cursor: pointer;
+    display: flex;
+    font-size: 14px;
+    line-height: normal;
+    flex-direction: row;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+
+#divSub {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    margin: 20px;
+    height: 263.1px;
+    width: 225.5px;
+}
+
+#divPai {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    width: 300px;
+}
+
+#link {
+    color: #000;
+    text-decoration: none;
+}
+
+.style_content p {
+    cursor: pointer;
+    display: block;
+    font-family: sans-serif;
+    font-size: 18.72px;
+    font-weight: 700;
+    margin-block-end: 8px;
+    margin-block-start: 11.2px;
+    margin-bottom: 8px;
+    margin-top: 20px;
+    text-align: center;
+    transition-duration: 0.4s;
+    transition-property: color;
+    transition-timing-function: ease;
+}
+
+.style_content img {
+    box-shadow: -10px 15px 20px black;
+    display: inline;
+    border-style: solid;
+    border-image-repeat: stretch;
+    border-image-slice: 100%;
+    border-image-source: none;
+    border-image-width: 1;
+    border-width: 4px;
+    overflow-x: clip;
+    overflow-x: clip;
+    transition-duration: 0.4s;
+    transition-delay: 0s;
+    transition-timing-function: ease;
+    width: 225.5px;
+    height: 225.5px;
+}
+
+.style_content div img:hover {
+    box-shadow: -10px 15px black;
+}
+
+.footer_container {
+    background-color: rgb(10, 15, 13);
+    color: rgb(249, 249, 249);
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 400;
+    justify-content: center;
+    height: 120px;
+    -webkit-box-align: center;
+    unicode-bidi: isolate;
+    margin-top: 60px;
+    background: none;
+}
+
+.footer {
+    display: flex;
+    flex-direction: column;
+    font-stretch: 100%;
+    font-size: 16px;
+    justify-content: center;
+    align-items: center;
+    line-height: normal;
+    unicode-bidi: isolate;
+    -webkit-box-align: center;
+    -webkit-box-pack: center;
+}
+
+.footer div p {
+    display: block;
+    font-family: sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.footer div a svg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(249, 249, 249);
+    fill: rgb(249, 249, 249);
+    cursor: pointer;
+    height: 40px;
+    margin: 8px;
+    position: relative;
+    left: 120px;
+    stroke: rgb(249, 249, 249);
+    transition-duration: 0.2s;
+    transition-property: color;
+    transition-timing-function: ease;
+    width: 40px;
+}
+
+.footer div a svg {
+    transition: transform 0.4s ease-in-out;
+}
+
+.footer div a svg:hover {
+    transform: scale(1.3);
+}
