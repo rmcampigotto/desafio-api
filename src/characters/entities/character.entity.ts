@@ -1,1 +1,3 @@
-export class Character {}
+export class CharacterEntity {
+
+}
