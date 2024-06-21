@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: arial;
 }
 
 body {
@@ -9,6 +10,7 @@ body {
     font-size: 15px;
     font-weight: 700;
     background-image: url('Imagens/Fundo.png');
+    overflow-y: hidden;
 }
 
 .mensagem {
@@ -17,10 +19,12 @@ body {
     color: rgb(249, 249, 249);
     align-items: center;
     align-content: center;
-    display: grid;
-    justify-content: start;
+    display: flex;
+    justify-content: flex-start;
     justify-items: center;
-    background-image: url('Imagens/Fundo.png');
+    background: none;
+    flex-direction: row;
+    flex-wrap: nowrap;
 }
 
 .mensagem img {
@@ -31,13 +35,34 @@ body {
     position: relative;
 }
 
+.search {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+.search input {
+    display: flex;
+    cursor: pointer;
+    height: 25px;
+    width: 350px;
+    margin: 10px;
+    padding-left: 5px;
+}
+
 .personagens {
     color: rgb(10, 15, 13);
     font-family: sans-serif;
     display: block;
     font-size: 15px;
     font-weight: 400;
-    unicode-range: isolate;
+    height: 500px;
 }
 
 .container {
@@ -61,17 +86,60 @@ body {
     unicode-bidi: isolate;
     line-height: normal;
     justify-content: center;
-    overflow: hidden;
+}
+
+.grid img {
+    display: flex;
+    height: 180px;
+    width: 180px;
+    margin: 30px;
 }
 
 .style_container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     font-weight: 400;
     grid-column-end: auto;
     grid-column-start: span 3;
     justify-self: center;
     align-items: center;
+    flex-wrap: wrap;
+    height: 500px;
+    width: 750px;
+    overflow-y: scroll;
+}
+
+/* Para navegadores WebKit (Chrome, Safari) */
+.style_container::-webkit-scrollbar {
+    width: 8px;
+    /* Largura da barra de rolagem vertical */
+    height: 8px;
+    /* Altura da barra de rolagem horizontal */
+}
+
+.style_container::-webkit-scrollbar-track {
+    background: #000;
+    /* Cor do trilho da barra de rolagem */
+}
+
+.style_container::-webkit-scrollbar-thumb {
+    background: #00FF00;
+    /* Cor da parte da barra de rolagem */
+    border-radius: 10px;
+    /* Borda arredondada da barra de rolagem */
+}
+
+.style_container::-webkit-scrollbar-thumb:hover {
+    background: #00CC00;
+    /* Cor da barra de rolagem ao passar o mouse */
+}
+
+/* Para navegadores Firefox */
+body {
+    scrollbar-width: thin;
+    /* Largura fina */
+    scrollbar-color: #00FF00 #000;
+    /* Cor da barra de rolagem e do trilho */
 }
 
 .style_content {
@@ -150,41 +218,59 @@ body {
 }
 
 .footer_container {
-    background-color: rgb(10, 15, 13);
     color: rgb(249, 249, 249);
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     font-size: 16px;
     font-weight: 400;
-    justify-content: center;
-    height: 120px;
-    -webkit-box-align: center;
-    unicode-bidi: isolate;
+    justify-content: flex-start;
+    height: 80px;
     margin-top: 60px;
     background: none;
+    flex-direction: row;
 }
 
 .footer {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     font-stretch: 100%;
     font-size: 16px;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-end;
     line-height: normal;
     unicode-bidi: isolate;
     -webkit-box-align: center;
     -webkit-box-pack: center;
+    flex-wrap: nowrap;
+    width: 100%;
+    bottom: 0;
+    position: fixed;
 }
 
-.footer div p {
+.footer .imagem img {
+    height: 250px;
+}
+
+.footer .git {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: flex-start;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+.footer .git p {
     display: block;
     font-family: sans-serif;
     font-size: 16px;
     font-weight: 500;
 }
 
-.footer div a svg {
+.footer .git a svg {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -202,10 +288,10 @@ body {
     width: 40px;
 }
 
-.footer div a svg {
+.footer .git a svg {
     transition: transform 0.4s ease-in-out;
 }
 
-.footer div a svg:hover {
+.footer .git a svg:hover {
     transform: scale(1.3);
 }
