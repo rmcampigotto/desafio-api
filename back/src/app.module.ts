@@ -1,10 +1,9 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { MongooseModule } from '@nestjs/mongoose';
 import { CharactersModule } from './characters/characters.module';
-import { CharactersController } from './characters/characters.controller';
 
 @Module({
-  imports: [CharactersModule],
+  imports: [CharactersModule, MongooseModule.forRoot('mongodb://localhost:27017/rickmorty')],
   controllers: [],
   providers: [],
 })
