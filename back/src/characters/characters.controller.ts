@@ -1,8 +1,7 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Req, Res, Put } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Patch } from '@nestjs/common';
 import { CharactersService } from './characters.service';
 import { CreateCharacterDto } from './dto/create-character.dto';
 import { UpdateCharacterDto } from './dto/update-character.dto';
-import { exit } from 'process';
 
 @Controller('characters')
 export class CharactersController {
@@ -10,53 +9,80 @@ export class CharactersController {
 
   @Get('apiSearchInfo')
   async apiSearch() {
-    const baseUrl = 'https://rickandmortyapi.com/api';
-    const url = '/character';
-    let totalCharacters = 0;
+    try {
+      const baseUrl = 'https://rickandmortyapi.com/api';
+      const url = '/character';
+      let totalCharacters = 0;
 
-    let page = 1;
-    while (totalCharacters < 50) {
-      const response = await fetch(`${baseUrl}${url}?page=${page}`);
-      const data = await response.json();
-      const nextResults = data.results;
+      let page = 1;
+      while (totalCharacters < 50) {
+        const response = await fetch(`${baseUrl}${url}?page=${page}`);
+        const data = await response.json();
+        const nextResults = data.results;
 
-      for (const element of nextResults) {
-        await this.create(element);
-        totalCharacters++;
-        if (totalCharacters >= 50) {
-          break;
+        for (const element of nextResults) {
+          await this.create(element, 2);
+          totalCharacters++;
+          if (totalCharacters >= 50) {
+            break;
+          }
         }
+        page++;
       }
-      page++;
+      return { message: `Salvo ${totalCharacters} personagens com sucesso!` };
+    } catch (error) {
+      return { message: `Erro ao salvar dados da API: ${error}` };
     }
-    return { message: `Salvo ${totalCharacters} personagens com sucesso!` };
   }
 
-  // ===== CÓDIGO ABAIXO - PADRÃO GERADO PELO NEST =====
-  // OBS: Alterado de acordo com nossa necessidade
-
   @Post('create')
-  create(@Body() createCharacterDto: CreateCharacterDto) {
-    return this.charactersService.create(createCharacterDto);
+  create(@Body() createCharacterDto: CreateCharacterDto, option = 1) {
+    try {
+      this.charactersService.create(createCharacterDto);
+      if (option == 1) {
+        return { message: `Personagem salvo com sucesso!`, charcacter: createCharacterDto };
+      }
+    } catch (error) {
+      return { message: `Erro ao salvar o personagem: ${error}` };
+    }
   }
 
   @Get('findAll')
   findAll() {
-    return this.charactersService.findAll();
+    try {
+      return this.charactersService.findAll();
+    } catch (error) {
+      return { message: `Erro ao procurar os personagens: ${error}` };
+    }
+
   }
 
   @Get('findById/:id')
   findOne(@Param('id') id: number) {
-    return this.charactersService.findOne(id);
+    try {
+      return this.charactersService.findOne(id);
+    } catch (error) {
+      return { message: `Erro ao procurar o personagem com ID: ${id}: ${error}` };
+    }
   }
 
-  @Put('update/:id')
+  @Patch('update/:id')
   update(@Param('id') id: number, @Body() updateCharacterDto: UpdateCharacterDto) {
-    return this.charactersService.update(id, updateCharacterDto);
+    try {
+      this.charactersService.update(id, updateCharacterDto);
+      return { message: `Personagem salvo com sucesso!`, charcacter: updateCharacterDto };
+    } catch (error) {
+      return { message: `Erro ao alterar o personagem com ID: ${id}: ${error}` };
+    }
   }
 
   @Delete('delete/:id')
   remove(@Param('id') id: number) {
-    return this.charactersService.remove(id);
+    try {
+      this.charactersService.remove(id);
+      return { message: `Personagem deletado com sucesso!` };
+    } catch (error) {
+      return { message: `Erro ao deletar o personagem com ID: ${id}: ${error}` };
+    }
   }
 }
