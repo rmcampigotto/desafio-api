@@ -14,16 +14,7 @@ export class CharactersController {
     const url = '/character';
     let totalCharacters = 0;
 
-    const response = await fetch(`${baseUrl}${url}`);
-    const data = await response.json();
-    const results = data.results;
-
-    for (const element of results) {
-      await this.create(element);
-      totalCharacters++;
-    }
-
-    let page = 2;
+    let page = 1;
     while (totalCharacters < 50) {
       const response = await fetch(`${baseUrl}${url}?page=${page}`);
       const data = await response.json();
