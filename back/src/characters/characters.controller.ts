@@ -3,6 +3,15 @@ import { CharactersService } from './characters.service';
 import { CreateCharacterDto } from './dto/create-character.dto';
 import { UpdateCharacterDto } from './dto/update-character.dto';
 
+// CRIANDO A CLASSE DE ERRO PERSONALIZADO:
+
+class CharacterSaveError extends Error {
+  constructor(message: string, public characterId?: number, public errorCode?: string) {
+    super(message);
+    this.name = 'CharacterSaveError';
+  }
+}
+
 @Controller('characters')
 export class CharactersController {
   constructor(private readonly charactersService: CharactersService) { }
@@ -31,7 +40,15 @@ export class CharactersController {
       }
       return { message: `Salvo ${totalCharacters} personagens com sucesso!` };
     } catch (error) {
-      return { message: `Erro ao salvar dados da API: ${error}` };
+      if (error instanceof CharacterSaveError) {
+        console.error('Erro ao salvar personagem:', error.message);
+        console.error('ID do personagem:', error.characterId);
+        console.error('Código do erro:', error.errorCode);
+    
+        return { message: `Erro ao salvar personagem com ID = ${error.characterId} : ${error.message }`, error_code: error.errorCode };
+      } else {
+        return { message: 'Erro inesperado durante a busca de dados: ' + error.message, error_code: error.errorCode };
+      }
     }
   }
 
@@ -43,7 +60,15 @@ export class CharactersController {
         return { message: `Personagem salvo com sucesso!`, charcacter: createCharacterDto };
       }
     } catch (error) {
-      return { message: `Erro ao salvar o personagem: ${error}` };
+      if (error instanceof CharacterSaveError) {
+        console.error('Erro ao salvar personagem:', error.message);
+        console.error('ID do personagem:', error.characterId);
+        console.error('Código do erro:', error.errorCode);
+    
+        return { message: `Erro ao salvar personagem com ID = ${error.characterId} : ${error.message }`, error_code: error.errorCode };
+      } else {
+        return { message: 'Erro inesperado durante a busca de dados: ' + error.message, error_code: error.errorCode };
+      }
     }
   }
 
