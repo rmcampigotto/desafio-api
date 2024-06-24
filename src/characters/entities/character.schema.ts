@@ -5,7 +5,7 @@ export type CharacterDocument = HydratedDocument<Character>;
 
 @Schema()
 export class Character {
-    @Prop({ required: true })
+    @Prop({ required: true, unique: true })
     id: Number;
 
     @Prop({ required: true })

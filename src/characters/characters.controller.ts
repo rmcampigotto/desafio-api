@@ -1,7 +1,8 @@
-import { Controller, Get, Post, Body, Param, Delete, Patch } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Patch, UseGuards } from '@nestjs/common';
 import { CharactersService } from './characters.service';
 import { CreateCharacterDto } from './dto/create-character.dto';
 import { UpdateCharacterDto } from './dto/update-character.dto';
+import { AuthGuard } from 'src/auth/auth.guard';
 
 // CRIANDO A CLASSE DE ERRO PERSONALIZADO:
 
@@ -16,6 +17,7 @@ class CharacterSaveError extends Error {
 export class CharactersController {
   constructor(private readonly charactersService: CharactersService) { }
 
+  @UseGuards(AuthGuard)
   @Get('apiSearchInfo')
   async apiSearch() {
     try {
@@ -52,6 +54,7 @@ export class CharactersController {
     }
   }
 
+  @UseGuards(AuthGuard)
   @Post('create')
   create(@Body() createCharacterDto: CreateCharacterDto, option = 1) {
     try {
@@ -72,6 +75,7 @@ export class CharactersController {
     }
   }
 
+  @UseGuards(AuthGuard)
   @Get('findAll')
   findAll() {
     try {
@@ -82,6 +86,7 @@ export class CharactersController {
 
   }
 
+  @UseGuards(AuthGuard)
   @Get('findById/:id')
   findOne(@Param('id') id: number) {
     try {
@@ -91,6 +96,7 @@ export class CharactersController {
     }
   }
 
+  @UseGuards(AuthGuard)
   @Patch('update/:id')
   update(@Param('id') id: number, @Body() updateCharacterDto: UpdateCharacterDto) {
     try {
@@ -101,6 +107,7 @@ export class CharactersController {
     }
   }
 
+  @UseGuards(AuthGuard)
   @Delete('delete/:id')
   remove(@Param('id') id: number) {
     try {
